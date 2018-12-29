@@ -1,0 +1,107 @@
+<br/>
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <dx-form id="form"
+          [formData]="fixture">          
+          <dxi-item itemType="group" cssClass="second-group">
+            <dxi-item itemType="group">
+              <dxi-item dataField="Id" [label]="{ text: 'Select a Fixture', visible: true, showColon: true }" editorType="dxSelectBox" [editorOptions]="{ items: fixtures, value: 0, displayExpr: 'Name', valueExpr: 'Id', onSelectionChanged: changed }"></dxi-item>
+            </dxi-item>            
+          </dxi-item>
+      </dx-form>
+  </div>
+</div>
+<br/>
+<dx-data-grid
+    id="gridContainer"
+    [dataSource]="sourceComponents"
+    [headerFilter]='{
+        visible: true
+    }'
+    [showBorders]="true"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [rowAlternationEnabled]="true"
+    [editing]='{
+        allowUpdating: true,
+        allowDeleting: false,
+        allowAdding: false,
+        mode: "form"
+    }'
+    (onCellPrepared)="onCellPrepared($event)"
+    (onCellClick)="onCellClick($event)">
+    <dxi-column dataField="Name" width="auto" allowFiltering="true" allowSorting="true" [allowEditing]="false"></dxi-column>
+    <dxi-column dataField="Design" width="150" allowFiltering="true" allowSorting="true" cellTemplate="cellTemplate">
+        <dxo-lookup
+                [dataSource]="test"
+                displayExpr="Display"
+                valueExpr="ID">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="Manufacturing" width="200" allowFiltering="true" allowSorting="true" cellTemplate="cellTemplate">
+        <dxo-lookup
+                [dataSource]="test"
+                displayExpr="Display"
+                valueExpr="ID">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="QA" allowFiltering="true" width="150" allowSorting="true" cellTemplate="cellTemplate">
+        <dxo-lookup
+                [dataSource]="test"
+                displayExpr="Display"
+                valueExpr="ID">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="Assembly" allowFiltering="true" width="150" allowSorting="true" cellTemplate="cellTemplate">
+        <dxo-lookup
+                [dataSource]="test"
+                displayExpr="Display"
+                valueExpr="ID">
+        </dxo-lookup>
+    </dxi-column>
+    <div *dxTemplate="let data of 'cellTemplate'" class="text-center">
+        <span [ngSwitch]="data.value" >            
+            <i title="Pending" *ngSwitchCase="0" class="material-icons text-warning" >schedule</i>
+            <i title="Done" *ngSwitchCase="1" class="material-icons text-success">done</i>
+            <i title="Rejected" *ngSwitchCase="2" class="material-icons text-danger">error</i>
+            <i title="In Progress" *ngSwitchCase="3" class="material-icons text-primary">play_arrow</i>
+            <i title="Not Required" *ngSwitchCase="4" class="material-icons text-muted">not_interested</i>
+        </span>
+    </div>
+</dx-data-grid>
+
+<dx-popup
+    class="popup"
+    width="50%"
+    height="50%"
+    [showTitle]="true"
+    title="Department details"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupVisible">
+        <div *dxTemplate="let temp of 'content'">
+            <dx-data-grid
+                id="gridContainer"
+                [dataSource]="detailDataSource"
+                [headerFilter]='{
+                    visible: true
+                }'
+                [showBorders]="true"
+                [showColumnLines]="false"
+                [showRowLines]="true"
+                [rowAlternationEnabled]="true">
+                <dxi-column dataField="Process" allowFiltering="true" allowSorting="true"></dxi-column>
+                <dxi-column dataField="Status" allowFiltering="true" allowSorting="true" cellTemplate="cellTemplate" [headerFilter]='{ dataSource: filterDataSource }'></dxi-column>
+                <dxi-column dataField="Comment" allowFiltering="true" allowSorting="true"></dxi-column>
+                <div *dxTemplate="let data of 'cellTemplate'" class="text-center">
+                    <span [ngSwitch]="data.value" >            
+                        <i title="Pending" *ngSwitchCase="0" class="material-icons text-warning" >schedule</i>
+                        <i title="Done" *ngSwitchCase="1" class="material-icons text-success">done</i>
+                        <i title="Rejected" *ngSwitchCase="2" class="material-icons text-danger">error</i>
+                        <i title="In Progress" *ngSwitchCase="3" class="material-icons text-primary">play_arrow</i>
+                        <i title="Not Required" *ngSwitchCase="4" class="material-icons text-muted">not_interested</i>
+                    </span>
+                </div>
+            </dx-data-grid>
+        </div>
+</dx-popup>

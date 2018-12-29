@@ -1,0 +1,8 @@
+::ng-deep .dx-cell-focus-disabled {
+    text-align: center!important
+}
+
+::ng-deep .material-icons:hover {
+    font-size: xx-large;
+    cursor: pointer;
+}

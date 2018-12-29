@@ -1,0 +1,136 @@
+<div class="row">  
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="card text-center bg-primary">          
+          <div class="card-body">
+            <span class="card-title">Fixture</span>
+            <h1>10</h1>  
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+        <div class="card text-center bg-success">          
+          <div class="card-body">
+            <span class="card-title">Design</span>
+            <h1>11</h1>  
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+        <div class="card text-center bg-danger">          
+          <div class="card-body">
+            <span class="card-title">Manufacture</span>
+            <h1>65</h1>  
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+        <div class="card text-center bg-info">          
+          <div class="card-body">
+            <span class="card-title">QA</span>
+            <h1>34</h1>  
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+        <div class="card text-center bg-warning">          
+          <div class="card-body">
+            <span class="card-title">Assembly</span>
+            <h1>26</h1>  
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <dx-chart
+          title="Monthly fixtures"
+          palette="Soft Pastel"
+          [dataSource]="dataByMonth">
+          <dxi-series valueField="fixture" name="Fixtures"></dxi-series>          
+          <dxo-common-series-settings
+              #commonSeries
+              argumentField="month"
+              type="area">
+          </dxo-common-series-settings>
+          <dxo-margin [bottom]="20"></dxo-margin>
+          <dxo-argument-axis [valueMarginsEnabled]="false"></dxo-argument-axis>
+          <dxo-export [enabled]="true"></dxo-export>
+          <dxo-legend
+              verticalAlignment="bottom"
+              horizontalAlignment="center">
+          </dxo-legend>
+        </dx-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <dx-chart
+            id="chart"
+            title="Monthly components"
+            [dataSource]="dataByMonth"
+            palette="Bright">
+            <dxi-series
+                argumentField="month"
+                valueField="component"
+                name="Components"
+                type="bar">
+                <dxo-label
+                    [visible]="true"
+                    [format]="{
+                        type: 'fixedPoint',
+                        precision: '0'
+                    }">
+                </dxo-label>
+            </dxi-series>
+            <dxo-legend
+                verticalAlignment="bottom"
+                horizontalAlignment="center">
+            </dxo-legend>
+            <dxo-export [enabled]="true"></dxo-export>
+        </dx-chart>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <dx-pie-chart
+        id="pie"
+        type="doughnut"
+        title="Equipment details by use"
+        palette="Bright"
+        [dataSource]="equipments">
+        <dxi-series
+            argumentField="type">
+            <dxo-label
+                [visible]="true"
+                format="fixedPoint">
+                <dxo-connector [visible]="true"></dxo-connector>
+            </dxo-label>
+        </dxi-series>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-legend
+            [margin]="0"
+            horizontalAlignment="right"
+            verticalAlignment="top"></dxo-legend>
+        <dxo-tooltip
+            [enabled]="true"
+            [customizeTooltip]="customizeTooltip"
+            format="fixedPoint">
+        </dxo-tooltip>
+    </dx-pie-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <dx-polar-chart
+            id="chart"
+            [useSpiderWeb]="true"
+            title="Component progress"
+            [dataSource]="progressData"
+            palette="Bright">
+            <dxi-series valueField="delay" name="Delay"></dxi-series>
+            <dxi-series valueField="onTime" name="On Time"></dxi-series>
+            <dxi-series valueField="notStarted" name="Not Started"></dxi-series>
+            <dxi-series valueField="early" name="Early"></dxi-series>
+            <dxo-common-series-settings type="line"></dxo-common-series-settings>
+            <dxo-export [enabled]="true"></dxo-export>
+            <dxo-tooltip [enabled]="true"></dxo-tooltip>
+        </dx-polar-chart>
+    </div>    
+</div>
+

@@ -1,0 +1,16 @@
+<header *ngIf="!isLogin">
+  <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-10 col-sm-8 col-xs-12">
+          <dx-nav-bar 
+                    [dataSource]="navOptions"
+                    (onItemClick)="onItemClick($event)" >
+          </dx-nav-bar>
+      </div>
+  </div>  
+</header>
+<body>
+  <div class="container">
+      <router-outlet></router-outlet>
+  </div>    
+</body>
+
